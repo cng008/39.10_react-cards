@@ -11,13 +11,8 @@ import axios from 'axios'
 
 const useAxios = url => {
   const [responses, setResponse] = useState([])
-  const addResponseData = async urlOptions => {
-    let completeUrl
-    typeof urlOptions === 'string'
-      ? (completeUrl = url + urlOptions)
-      : (completeUrl = url)
-    console.log(completeUrl)
-    const response = await axios.get(completeUrl)
+  const addResponseData = async (options = '') => {
+    const response = await axios.get(url + options)
     setResponse(cards => [...cards, { ...response.data, id: uuid() }])
   }
   return [responses, addResponseData]
